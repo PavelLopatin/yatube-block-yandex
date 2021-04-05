@@ -19,9 +19,9 @@ class Post(models.Model):
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_posts')
     group = models.ForeignKey(
-    Group, on_delete=models.CASCADE, related_name='group_posts', blank=True, null=True, verbose_name='Выберите группу', 
+    Group, on_delete=models.CASCADE, related_name='group_posts',
+    blank=True, null=True, verbose_name='Выберите группу', 
     help_text='Выберите группу из перечисленных, либо пропустите поле')
-    # поле для картинки
     image = models.ImageField(upload_to='posts/', blank=True, null=True) 
 
     def __str__(self):
@@ -34,6 +34,7 @@ class Comment(models.Model):
     text = models.TextField( verbose_name='Текст комментария',
                             help_text='Добавьте комментарий')
     created = models.DateTimeField('Дата публикации', auto_now_add=True)
+
 
 class Follow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
