@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ user.get_full_name }}{% endblock %}
+{% block content %}
+<div class="row">
+<div class="col-md-3 mb-3 mt-1">
+{% include 'includes/author_card.html' %}
+{% include 'includes/post_item.html' %}
+{% include 'includes/comments.html' %}
+</div>
+{% endblock %}

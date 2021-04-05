@@ -1,0 +1,46 @@
+<div class="card ">
+        <div class="card-body">
+                <div class="h2">
+                        <!-- Имя автора -->
+                        {{ author.get_full_name }}
+                </div>
+                <div class="h3 text-muted">
+                        <!-- username автора -->
+                        @{{ author.username }}
+                </div>
+        </div>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                        <div class="h6 text-muted">
+                        Подписчиков: {{ author.following.all.count }} <br />
+                        Подписан: {{ author.follower.all.count }}
+                        </div>
+                </li>
+                <li class="list-group-item">
+                        <div class="h6 text-muted">
+                                <!-- Количество записей -->
+                                Записей: {{ number_of_posts }}
+                        </div>
+                </li>
+                {% if user.is_authenticated %} 
+                   {% if author == user %}
+                   {% else %} 
+                        <li class="list-group-item">
+                                {% if following %}
+                                <a class="btn btn-info" 
+                                        href="{% url 'profile_unfollow' author.username %}" role="button"> 
+                                        Отписаться 
+                                </a> 
+                                {% else %}
+                                <a class="btn btn-info" 
+                                        href="{% url 'profile_follow' author.username %}" role="button">
+                                Подписаться 
+                                </a>
+                                {% endif %}
+                        </li> 
+                    {% endif %}
+                {% endif %}
+        </ul>
+        </div>
+</div>
+<div class="col-md-9"> 

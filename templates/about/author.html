@@ -1,0 +1,44 @@
+<!-- templates/about/author.html -->
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+{% load static %} 
+{% load user_filters %}
+  <main role="main" class="container">
+    <div class="row">
+      <!-- Левый вспомогательный блок -->
+      <div class="col-md-3 mb-3 mt-1">
+        <div class="card">
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="h3">
+                  <img src='{% static "images/pavel.jpg" %}' class="img-fluid" width="600" height="800">
+                </div> 
+              </li>
+              <li class="list-group-item">
+                <div class="h6 text-muted">
+                  Лопатин Павел Сергееевич 
+                  <br>Дата рождения: 27.11.1999
+                </div>
+              </li>
+            </ul>                                               
+          </div>                    
+        </div>                
+      </div>
+      <!-- Тело страницы -->
+      <div class="col-md-9">
+        <div class="card-body">                    
+          <div class="card-text">
+            <p>Начинающий программист,обучаюсь в яндекс.практикум, направление python-разработчик. Работаю преподавателем по гитаре, проработав два года, решил сменить профессию.</p>
+            <a class="font-weight-bold">Контактная информация:</a>
+            <br>Ссылка на GitHub: <a class="text-dark" href="https://github.com/PavelLopatin">PavelLopatin</a>
+            <br>Почта: <a class="text-dark"></a>lopatyn1244@gmail.com</a>
+            <br>Телефон: <a class="text-dark"></a>+7(903)397-66-67</a>
+            <br></p>
+          </div>                    
+        </div>                
+      </div>            
+    </div>        
+  </main>
+{% endblock %}
