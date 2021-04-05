@@ -89,7 +89,7 @@ class ViewTest(TestCase):
             with self.subTest(value=value):
                 form_field = response.context['form'].fields[value]
                 self.assertIsInstance(form_field, expected)
-    
+
 
 class FollowTest(TestCase):
     def setUp(self):
@@ -105,7 +105,7 @@ class FollowTest(TestCase):
         Follow.objects.create(user=self.follower, author=self.user)
         self.follower_client.get(
             reverse('profile_unfollow', kwargs={'username': self.user}))
-        self.assertFalse( Follow.objects.filter(user=self.follower,
+        self.assertFalse(Follow.objects.filter(user=self.follower,
                                                 author=self.user).exists())
 
     def test_follow(self):

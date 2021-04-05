@@ -13,7 +13,7 @@ def index(request):
     paginator = Paginator(post_list, settings.PAR_PAGE)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
-    return render(request, 'index.html', 
+    return render(request, 'index.html',
                   {'page': page})
 
 
