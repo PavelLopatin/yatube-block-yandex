@@ -102,32 +102,16 @@ class FollowTest(TestCase):
 
     def test_unfollow(self):
         """Тестируем отписку"""
-        Follow.objects.create(
-            user=self.follower,
-            author=self.user,
-        )
+        Follow.objects.create(user=self.follower, author=self.user)
         self.follower_client.get(
-            reverse('profile_unfollow', kwargs={'username': self.user})
-        )
-        self.assertFalse(
-            Follow.objects.filter(
-                user=self.follower,
-                author=self.user
-            ).exists()
-        )
+            reverse('profile_unfollow', kwargs={'username': self.user}))
+        self.assertFalse( Follow.objects.filter(user=self.follower,
+                                                author=self.user).exists())
 
     def test_follow(self):
         """Тестируем подписку"""
-        Follow.objects.create(
-            user=self.follower,
-            author=self.user,
-        )
+        Follow.objects.create(user=self.follower, author=self.user)
         self.follower_client.get(
-            reverse('profile_follow', kwargs={'username': self.user})
-        )
-        self.assertTrue(
-            Follow.objects.filter(
-                user=self.follower,
-                author=self.user
-            ).exists()
-        )
+            reverse('profile_follow', kwargs={'username': self.user}))
+        self.assertTrue(Follow.objects.filter(user=self.follower,
+                                              author=self.user).exists())

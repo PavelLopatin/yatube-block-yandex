@@ -111,7 +111,7 @@ class PostsCreateFormTests(TestCase):
         self.user = User.objects.get(username='tester')
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
-        
+
     def test_create_post(self):
         """Валидная форма создает запись в Posts."""
         posts_count = Post.objects.count()
@@ -135,6 +135,4 @@ class PostsCreateFormTests(TestCase):
             Post.objects.filter(
                 group=form_data['group'],
                 text=form_data['text'],
-                image='posts/small.gif',
-            ).exists()
-        )
+                image='posts/small.gif').exists())

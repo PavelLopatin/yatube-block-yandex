@@ -98,9 +98,9 @@ def post_edit(request, username, post_id):
 
 def page_not_found(request, exception):
     return render(
-        request, 
-        "misc/404.html", 
-        {"path": request.path}, 
+        request,
+        "misc/404.html",
+        {"path": request.path},
         status=404)
 
 
@@ -119,7 +119,8 @@ def add_comment(request, username, post_id):
             comment.post = post
             comment.save()
             return redirect("post", username, post_id)
-    return render(request, "includes/comments.html", {"form": form, 'post': post})
+    return render(request, "includes/comments.html",
+                  {"form": form, 'post': post})
 
 
 @login_required
