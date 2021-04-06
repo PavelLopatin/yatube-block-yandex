@@ -23,10 +23,6 @@ def group_posts(request, slug):
     paginator = Paginator(group_list, settings.PAR_PAGE)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
-    if len(group_list) > 10:
-        return render(request, 'group.html',
-                      {'group': group, 'page': page,
-                       'paginator': paginator})
     return render(request, 'group.html',
                   {'group': group, 'page': page})
 
@@ -63,18 +59,18 @@ def post_view(request, username: str, post_id: int):
     """Возвращает страницу просмотра конкретного поста"""
     post = get_object_or_404(Post, id=post_id)
     number_of_posts = Post.objects.filter(
-        author=post.author).select_related("author").count()
+        author=post.author).select_related('author').count()
     form = CommentForm(request.POST or None)
     comments = Comment.objects.filter(post__id=post_id)
     context = {
-        "author": post.author,
-        "post": post,
-        "number_of_posts": number_of_posts,
-        "form": form,
-        "comments": comments,
-        "post_id": post_id
+        'author': post.author,
+        'post': post,
+        'number_of_posts': number_of_posts,
+        'form': form,
+        'comments': comments,
+        'post_id': post_id
     }
-    return render(request, "post.html", context)
+    return render(request, 'post.html', context)
 
 
 @login_required
@@ -89,7 +85,7 @@ def post_edit(request, username, post_id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect("post", username=request.user.username,
+            return redirect('post', username=request.user.username,
                             post_id=post_id)
 
     return render(
@@ -99,13 +95,13 @@ def post_edit(request, username, post_id):
 def page_not_found(request, exception):
     return render(
         request,
-        "misc/404.html",
-        {"path": request.path},
+        'misc/404.html',
+        {'path': request.path},
         status=404)
 
 
 def server_error(request):
-    return render(request, "misc/500.html", status=500)
+    return render(request, 'misc/500.html', status=500)
 
 
 @login_required
@@ -118,9 +114,9 @@ def add_comment(request, username, post_id):
             comment.author = request.user
             comment.post = post
             comment.save()
-            return redirect("post", username, post_id)
-    return render(request, "includes/comments.html",
-                  {"form": form, 'post': post})
+            return redirect('post', username, post_id)
+    return render(request, 'includes/comments.html',
+                  {'form': form, 'post': post})
 
 
 @login_required
@@ -141,7 +137,7 @@ def profile_follow(request, username):
     if request.user != author:
         Follow.objects.get_or_create(
             user_id=request.user.id, author_id=author.id)
-    return redirect("profile", username)
+    return redirect('profile', username)
 
 
 @login_required
@@ -150,4 +146,4 @@ def profile_unfollow(request, username):
     if author != request.user:
         Follow.objects.filter(
             user_id=request.user, author_id=author).delete()
-    return redirect("profile", username)
+    return redirect('profile', username)
